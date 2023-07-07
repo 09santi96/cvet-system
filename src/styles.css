@@ -1,4 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    height:auto;
+    background: linear-gradient(45deg, #c0a9e0 0%, #ebeaaf 100%);
+}
+body{
+    background: none;
+}
+
+/*---------------------------MEDIA QUERIES---------------------------*/
+@media only screen and (max-width: 1000px) {
+    html {
+        background: linear-gradient(45deg, #af8edb 0%, #ebeaaf 100%);
+        background-size:150vh 240vw;
+        background-repeat: round;
+    }
+    .offset-3 {
+        margin: 0; 
+      }
+      .row > * {
+          padding:0;
+          margin:0;
+      }
+      .container{
+        margin:0;
+      }
+}
+
+@media only screen and (max-width: 450px) {
+
+    html {
+        background: linear-gradient(45deg, #af8edb 0%, #ebeaaf 100%);
+        background-size:100vh 350vw;
+        background-repeat: no-repeat;
+    }
+    .offset-3 {
+      margin: 0; 
+    }
+    .row > * {
+        padding:0;
+        margin:0;
+    }
+
+}
+
+  @media only screen and (max-width: 230px) {
+
+    html {
+        background: linear-gradient(45deg, #af8edb 0%, #ebeaaf 100%);
+        background-size:80vh 700vw;
+        background-repeat: no-repeat;
+    }
+      
+  }

@@ -1,1 +1,19 @@
-{}
+{
+  "hosting": {
+    "public": "dist/cvet-system",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "frameworksBackend": {
+      "region": "us-central1"
+    }
+  }
+}
