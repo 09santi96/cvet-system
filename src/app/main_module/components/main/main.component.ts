@@ -5,8 +5,7 @@ import {NgIf, NgFor} from '@angular/common';
 import {MediaMatcher} from '@angular/cdk/layout';
 import { ViewChild } from '@angular/core';
 
-
-
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-main',
@@ -62,13 +61,28 @@ export class MainComponent  implements OnDestroy  {
   }
 
   onLogout(): void {
+    Swal.fire({
+      title: 'Deseas cerrar sesion?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#673ab7',
+      background: '#e6d9fd',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      
+      if (result.isConfirmed) {
+        this.userService.logout()
+        .then(() => {
+          this.router.navigate(['/login']);
+        })
+        .catch(error => console.log(error));
+      }
 
- /*    this.userService.logout()
-      .then(() => {
-        this.router.navigate(['/login']);
-      })
-      .catch(error => console.log(error));*/
-  } 
+    })
+
+  }
 
 
 }
