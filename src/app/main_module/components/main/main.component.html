@@ -1,2 +1,42 @@
-<h1>Página principal</h1>
-<button (click)="onClick()" class="btn btn-outline-danger mt-5">Logout</button>
+<div class="menu-container"  [class.is-mobile]="mobileQuery.matches">
+
+  <mat-toolbar class="toolbar">
+    <img src="../../../assets/img/logo.png" alt="Logo">
+    <span *ngIf="!mobileQuery.matches">Colegio Medico Veterinario</span>
+    <span *ngIf="mobileQuery.matches">CMV</span>
+
+    <button mat-icon-button (click)="OnToggleMenu()" matTooltip="Abrir menu" aria-label="abrir menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span class="spacer"></span>
+    <button mat-icon-button matTooltip="Mi perfil" class="icon favorite-icon" aria-label="Mi perfil">
+      <mat-icon>person</mat-icon>
+    </button>
+    <button mat-icon-button (click)="onLogout()" matTooltip="Cerrar sesion" aria-label="Cerrar sesion">
+      <mat-icon>logout</mat-icon>
+    </button>
+
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenav-container" [hasBackdrop]="false" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    
+    <mat-sidenav  class="mat-sidenav" #mySidenav (mouseleave)="onMouseLeave()" [mode]="'over'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      
+      <mat-nav-list class="mat-nav-list">
+        <!-- Menu buttons -->
+          <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">
+            {{nav}}
+          </a>
+      
+      </mat-nav-list>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content">
+      <!-- dashboars and tables -->
+      <p *ngFor="let content of fillerContent">{{content}}</p>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+</div>

@@ -14,7 +14,14 @@ const routes: Routes = [
     ...canActivate(() => redirectUnauthorizedTo(['/login']))
   },
   { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'forgot-password',
+    loadChildren: () => 
+      import('./auth_module/components/forgot-password/forgot-password.module').then(
+        (m) =>m.ForgotPasswordModule
+      )
+  }
 ];
 
 @NgModule({

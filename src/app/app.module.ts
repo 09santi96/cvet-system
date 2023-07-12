@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //material components
 import { MaterialModule } from './shared/material.module';
+import { ForgotPasswordModule } from './auth_module/components/forgot-password/forgot-password.module';
+
+
 
 @NgModule({
   declarations: [
@@ -24,6 +27,7 @@ import { MaterialModule } from './shared/material.module';
     MainComponent,
     RegisterComponent,
     LoginComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -34,6 +38,7 @@ import { MaterialModule } from './shared/material.module';
     provideAuth(() => getAuth()),
     BrowserAnimationsModule,
     MaterialModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

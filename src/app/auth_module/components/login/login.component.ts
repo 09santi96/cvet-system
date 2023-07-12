@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-
+import { Component, HostListener  } from '@angular/core';
 
 import { FormControl, FormGroup, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { PopupsService } from 'src/app/shared/services/popups.service';
+
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -23,11 +24,12 @@ export class LoginComponent {
 
   formLogin: FormGroup;
   hide = true;
- 
+  matcher = new MyErrorStateMatcher();
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private popupsService: PopupsService
   ) { 
     this.formLogin = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -35,25 +37,36 @@ export class LoginComponent {
     })
    }
 
-    matcher = new MyErrorStateMatcher();
 
+  //EVENT ENTER
+  @HostListener('document:keypress', ['$event'])
+  onKeyPress(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.onSubmit();
+    }
+  }
+
+  //INICIO SESION
   onSubmit() {
     this.userService.login(this.formLogin.value)
-      .then(response => {
-        console.log(response);
-        this.router.navigate(['/main']);
-      })
-      .catch(error => console.log(error));
+    .then(response => {
+      this.popupsService.openSnackBar('Bienvenido', 'x', 3000, 'right', 'top');
+      this.router.navigate(['/main']);
+    })
+    .catch(error => {
+      this.popupsService.openSnackBar('Mail o Contraseña incorrecta', 'x', 2500, 'right', 'top');
+    });
   }
 
   //GOOGLE
   onClick() {
     this.userService.loginWithGoogle()
       .then(response => {
-        console.log(response);
         this.router.navigate(['/main']);
       })
-      .catch(error => console.log(error))
+      .catch(error => {})
   }
 
 }
+
+

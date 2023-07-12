@@ -44,11 +44,10 @@
     </mat-form-field>
 
     <div class="col-lg-12 text-end">
-        <p class=""> <a href="#">¿Olvidaste tu contraseña?</a></p>
+        <p class="forgot-password"> <a [routerLink]="['/forgot-password']">¿Olvidaste tu contraseña?</a></p>
     </div>
-
     <div class="mt-4">
-        <button mat-raised-button color="primary" (click)="onSubmit()">Iniciar sesion</button>
+        <button mat-raised-button color="primary" [disabled]="formLogin.invalid" (click)="onSubmit()">Iniciar sesion</button>
     </div>
 
 
