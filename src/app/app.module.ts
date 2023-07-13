@@ -20,19 +20,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //material components
 import { MaterialModule } from './shared/material.module';
-import { ForgotPasswordModule } from './auth_module/components/forgot-password/forgot-password.module';
-
-
-
-
-
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
     RegisterComponent,
     LoginComponent,
+    MainComponent,
     MenuComponent,
     DashboardComponent,
     UsersComponent
