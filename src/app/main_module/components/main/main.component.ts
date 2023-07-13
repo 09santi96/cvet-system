@@ -1,8 +1,7 @@
 import { Component, ChangeDetectorRef, OnDestroy} from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../../auth_module/services/user.service';
-import {NgIf, NgFor} from '@angular/common';
-import {MediaMatcher} from '@angular/cdk/layout';
+import { MediaMatcher } from '@angular/cdk/layout';
 import { ViewChild } from '@angular/core';
 
 import Swal from 'sweetalert2'

@@ -10,6 +10,7 @@ import { MainComponent } from './main_module/components/main/main.component';
 import { RegisterComponent } from './auth_module/components/register/register.component';
 import { MenuComponent } from './main_module/components/menu/menu.component';
 import { DashboardComponent } from './main_module/components/dashboard/dashboard.component';
+import { UsersComponent } from './main_module/components/users/users.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
@@ -25,6 +26,7 @@ import { ForgotPasswordModule } from './auth_module/components/forgot-password/f
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +34,8 @@ import { ForgotPasswordModule } from './auth_module/components/forgot-password/f
     RegisterComponent,
     LoginComponent,
     MenuComponent,
-    DashboardComponent
+    DashboardComponent,
+    UsersComponent
     
   ],
   imports: [
