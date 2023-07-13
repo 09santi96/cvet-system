@@ -8,6 +8,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './auth_module/components/login/login.component';
 import { MainComponent } from './main_module/components/main/main.component';
 import { RegisterComponent } from './auth_module/components/register/register.component';
+import { MenuComponent } from './main_module/components/menu/menu.component';
+import { DashboardComponent } from './main_module/components/dashboard/dashboard.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
@@ -21,12 +23,16 @@ import { ForgotPasswordModule } from './auth_module/components/forgot-password/f
 
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    MenuComponent,
+    DashboardComponent
     
   ],
   imports: [

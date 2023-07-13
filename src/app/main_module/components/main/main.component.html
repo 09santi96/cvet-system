@@ -25,9 +25,7 @@
       
       <mat-nav-list class="mat-nav-list">
         <!-- Menu buttons -->
-          <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">
-            {{nav}}
-          </a>
+         <app-menu></app-menu>
       
       </mat-nav-list>
 
@@ -35,7 +33,9 @@
 
     <mat-sidenav-content class="sidenav-content">
       <!-- dashboars and tables -->
-      <p *ngFor="let content of fillerContent">{{content}}</p>
+      <!-- <p *ngFor="let content of fillerContent">{{content}}</p> -->
+      <app-dashboard></app-dashboard>
+      
     </mat-sidenav-content>
 
   </mat-sidenav-container>

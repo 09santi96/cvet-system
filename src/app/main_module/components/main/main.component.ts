@@ -7,6 +7,7 @@ import { ViewChild } from '@angular/core';
 
 import Swal from 'sweetalert2'
 
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -29,8 +30,6 @@ export class MainComponent  implements OnDestroy  {
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   @ViewChild('mySidenav') sidenav: any;
-
-  fillerNav = Array.from({length: 20}, (_, i) => `Nav Item ${i + 1}`);
 
 
   fillerContent = Array.from(
