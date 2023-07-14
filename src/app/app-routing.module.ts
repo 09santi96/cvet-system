@@ -6,36 +6,24 @@ import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 /*COMPONENTS*/
 import { LoginComponent } from './auth_module/components/login/login.component';
 import { RegisterComponent } from './auth_module/components/register/register.component';
+
 import { MainComponent } from './main_module/components/main/main.component';
-import { DashboardComponent } from './main_module/components/dashboard/dashboard.component';
-import { UsersComponent } from './main_module/components/users/users.component';
+import { ForgotPasswordComponent } from './auth_module/components/forgot-password/forgot-password.component';
+
 
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/main' },
   {
-    path: 'main',
-    component: MainComponent,
-    ...canActivate(() => redirectUnauthorizedTo(['/login'])),
-    children: [
-      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-      {
-        path: 'dashboard', component: DashboardComponent,
-      },
-      {
-        path: 'users', component: UsersComponent
-      }
-    ]
+    path: 'forgot-password', component: ForgotPasswordComponent
   },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   {
-    path: 'forgot-password',
-    loadChildren: () => 
-      import('./auth_module/components/forgot-password/forgot-password.module').then(
-        (m) =>m.ForgotPasswordModule
-      )
-  }
+    path: 'main',
+    component: MainComponent,
+    ...canActivate(() => redirectUnauthorizedTo(['/login']))
+  },
 ];
 
 @NgModule({
