@@ -7,7 +7,14 @@ import { MainRoutingModule } from './main-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UsersComponent } from './components/users/users.component';
 
-import { MaterialModule } from '../shared/material.module';
+/*material ui*/
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule } from '@angular/material/grid-list';
+import {MatButtonModule} from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 
 
@@ -19,7 +26,16 @@ import { MaterialModule } from '../shared/material.module';
   imports: [
     CommonModule,
     MainRoutingModule,
-    MaterialModule
+    MatGridListModule,
+    MatCardModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatPaginatorModule
+    
+  ],
+  exports:[
+    
   ]
 })
 export class MainModule { }

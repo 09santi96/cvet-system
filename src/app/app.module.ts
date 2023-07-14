@@ -21,6 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //material components
 import { MaterialModule } from './shared/material.module';
+/*PRIME FACES NG */
+import { PanelMenuModule } from 'primeng/panelmenu';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { MaterialModule } from './shared/material.module';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    PanelMenuModule
     
   ],
   providers: [],
