@@ -22,7 +22,15 @@ const routes: Routes = [
   {
     path: 'main',
     component: MainComponent,
-    ...canActivate(() => redirectUnauthorizedTo(['/login']))
+    ...canActivate(() => redirectUnauthorizedTo(['/login'])),
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./main_module/main.module')
+        .then(module => module.MainModule)
+      },
+
+    ]
   },
 ];
 

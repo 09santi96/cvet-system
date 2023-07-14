@@ -6,10 +6,12 @@ import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => import('./main.module')
-    .then(module => module.MainModule)
+    path: '', component: DashboardComponent
+  },
+  {
+    path: 'users', component: UsersComponent
   }
+
 ];
 
 @NgModule({

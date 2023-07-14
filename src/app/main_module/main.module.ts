@@ -7,6 +7,8 @@ import { MainRoutingModule } from './main-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UsersComponent } from './components/users/users.component';
 
+import { MaterialModule } from '../shared/material.module';
+
 
 
 @NgModule({
@@ -16,7 +18,8 @@ import { UsersComponent } from './components/users/users.component';
   ],
   imports: [
     CommonModule,
-    MainRoutingModule
+    MainRoutingModule,
+    MaterialModule
   ]
 })
 export class MainModule { }
