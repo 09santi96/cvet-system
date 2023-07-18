@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { PrimeIcons, MenuItem } from 'primeng/api';
+
 
 @Component({
   selector: 'app-menu',
@@ -16,27 +17,35 @@ export class MenuComponent implements OnInit {
       this.items = [
 
           {
-              label: 'Edit',
-              icon: 'pi pi-fw pi-pencil',
-              items: [
-                  {
-                      label: 'Left',
-                      icon: 'pi pi-fw pi-align-left'
-                  },
-                  {
-                      label: 'Right',
-                      icon: 'pi pi-fw pi-align-right'
-                  },
-                  {
-                      label: 'Center',
-                      icon: 'pi pi-fw pi-align-center'
-                  },
-                  {
-                      label: 'Justify',
-                      icon: 'pi pi-fw pi-align-justify'
-                  }
-              ]
-          }
+              label: 'Dashboard',
+              icon: 'pi pi-fw pi-home',
+              routerLink: 'dashboard'
+          },
+
+          {
+            label: 'Accesos',
+            icon: 'pi pi-fw pi-plus',
+            items: [
+                {
+                    label: 'Usuarios',
+                    icon: 'pi pi-fw pi-user',
+                    routerLink: 'users',
+                },
+                {
+                    label: 'Perfiles',
+                    icon: 'pi pi-fw pi-id-card'
+                },
+                {
+                    label: 'Veterinarios',
+                    icon: 'pi pi-fw pi-github'
+                },
+                {
+                    label: 'Legajos',
+                    icon: 'pi pi-fw pi-folder-open'
+                }
+            ]
+
+        }
       ];
   }
 

@@ -14,7 +14,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 
@@ -31,6 +31,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
+    MatToolbarModule,
     MatPaginatorModule
     
   ],

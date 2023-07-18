@@ -51,7 +51,7 @@ export class MainComponent  implements OnDestroy  {
   onMouseLeave(): void {
     setTimeout(() => {
       this.sidenav.close();
-    }, 2000);
+    }, 5000);
   }
 
   ngOnDestroy(): void {

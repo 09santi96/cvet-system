@@ -10,6 +10,7 @@ import { UsersDataSource, UsersItem } from './users-datasource';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements AfterViewInit {
+  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<UsersItem>;
