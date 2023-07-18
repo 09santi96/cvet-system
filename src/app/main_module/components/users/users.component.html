@@ -1,19 +1,21 @@
-<mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>My App</span>
-  <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>share</mat-icon>
-  </button>
-</mat-toolbar>
+<section class="panel">
+  <span class="icon-spacer">
+    <mat-icon>person</mat-icon>
+  </span>
+  <span>Usuarios</span>
+
+  <div class="button-row">
+    <button mat-fab extended color="primary">
+      <mat-icon>plus_one</mat-icon>
+      Agregar usuario
+    </button>
+  </div>
+
+</section>
+
 
 <div class="mat-elevation-z8">
-  <table mat-table class="full-width-table" matSort aria-label="Elements">
+  <table mat-table class="full-width-table" matSort aria-label="tabla usuarios">
     <!-- Id Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
@@ -26,6 +28,15 @@
       <td mat-cell *matCellDef="let row">{{row.name}}</td>
     </ng-container>
 
+
+    <!-- Columna para el botón -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-button (click)="onButtonClick(row.id)">Click Me</button>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
@@ -33,8 +44,8 @@
   <mat-paginator #paginator
       [length]="dataSource.data.length"
       [pageIndex]="0"
-      [pageSize]="10"
+      [pageSize]="5"
       [pageSizeOptions]="[5, 10, 20]"
-      aria-label="Select page">
+      aria-label="Seleccionar pagina">
   </mat-paginator>
 </div>

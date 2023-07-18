@@ -1,13 +1,34 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { UsersDataSource, UsersItem } from './users-datasource';
+import {Subject} from 'rxjs';
+
+
+export class MyCustomPaginatorIntl implements MatPaginatorIntl {
+  changes = new Subject<void>();
+
+  firstPageLabel = `Primera pagina`;
+  itemsPerPageLabel = `Usuarios por pagina:`;
+  lastPageLabel = `Ultima pagina`;
+  nextPageLabel = 'Siguiente pagina';
+  previousPageLabel = 'Anterior pagina';
+
+  getRangeLabel(page: number, pageSize: number, length: number): string {
+    if (length === 0) {
+      return `Pagina 1 de 1`;
+    }
+    const amountPages = Math.ceil(length / pageSize);
+    return `Pagina ${page + 1} de ${amountPages}`;
+  }
+}
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  styleUrls: ['./users.component.css'],
+  providers: [{provide: MatPaginatorIntl, useClass: MyCustomPaginatorIntl}],
 })
 export class UsersComponent implements AfterViewInit {
   
@@ -16,8 +37,9 @@ export class UsersComponent implements AfterViewInit {
   @ViewChild(MatTable) table!: MatTable<UsersItem>;
   dataSource: UsersDataSource;
 
+
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  displayedColumns = ['id', 'name', 'actions'];
 
   constructor() {
     this.dataSource = new UsersDataSource();
@@ -27,5 +49,8 @@ export class UsersComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
+  }
+  onButtonClick(id:number) :void {
+
   }
 }

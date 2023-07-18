@@ -15,7 +15,9 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatToolbarModule} from '@angular/material/toolbar';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 @NgModule({
@@ -32,7 +34,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatMenuModule,
     MatIconModule,
     MatToolbarModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
+    MatDividerModule
     
   ],
   exports:[
