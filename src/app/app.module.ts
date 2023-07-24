@@ -12,11 +12,14 @@ import { ForgotPasswordComponent } from './auth_module/components/forgot-passwor
 import { MainComponent } from './main_module/components/main/main.component';
 import { MenuComponent } from './main_module/components/menu/menu.component';
 
-
 import { ReactiveFormsModule } from '@angular/forms';
+
+/*firebase*/
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //material components
@@ -43,7 +46,8 @@ import { PanelMenuModule } from 'primeng/panelmenu';
     provideAuth(() => getAuth()),
     BrowserAnimationsModule,
     MaterialModule,
-    PanelMenuModule
+    PanelMenuModule,
+    provideFirestore(() => getFirestore())
     
   ],
   providers: [],

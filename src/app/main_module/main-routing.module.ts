@@ -8,15 +8,18 @@ import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
   {
-    path: '', pathMatch: 'full', redirectTo: 'dashboard' ,
+    path: '', pathMatch: 'full', redirectTo: 'dashboard'
   },
   {
     path: 'dashboard', component: DashboardComponent
   },
   {
     path: 'users', component: UsersComponent
+  },
+  {
+    path: '**', pathMatch: 'full', redirectTo: 'dashboard'
   }
-
+  
 ];
 
 @NgModule({

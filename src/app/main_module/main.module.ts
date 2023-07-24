@@ -18,12 +18,14 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import {MatDividerModule} from '@angular/material/divider';
+import { ModalUsersComponent } from './components/modal-users/modal-users.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    UsersComponent
+    UsersComponent,
+    ModalUsersComponent
   ],
   imports: [
     CommonModule,

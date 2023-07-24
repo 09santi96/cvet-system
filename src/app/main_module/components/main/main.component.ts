@@ -6,7 +6,6 @@ import { ViewChild } from '@angular/core';
 
 import Swal from 'sweetalert2'
 
-
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -29,14 +28,6 @@ export class MainComponent  implements OnDestroy  {
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   @ViewChild('mySidenav') sidenav: any;
-
-
-  fillerContent = Array.from(
-    {length: 10},
-    () =>
-      `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-       labore et dolore magna aliqua.`,
-  );
 
   OnToggleMenu(): void {
     if (this.sidenav) {
@@ -77,9 +68,7 @@ export class MainComponent  implements OnDestroy  {
         })
         .catch(error => console.log(error));
       }
-
     })
-
   }
 
 
