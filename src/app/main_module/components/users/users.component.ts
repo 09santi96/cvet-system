@@ -45,7 +45,8 @@ export class UsersComponent implements AfterViewInit {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'name', 'actions'];
 
-  constructor(private dialog:MatDialog) {
+  constructor(private dialog:MatDialog) 
+  {
     this.dataSource = new UsersDataSource();
   }
 
