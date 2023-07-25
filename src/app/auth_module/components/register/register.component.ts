@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../../auth_module/services/user.service';
 import { UserInterface } from '../../../main_module/components/users/model-user';
-
+//COMPONENTE SOLO PARA REGISTRAR UN USUARIO, SIN USO
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -12,14 +12,6 @@ import { UserInterface } from '../../../main_module/components/users/model-user'
 export class RegisterComponent implements OnInit {
 
   formReg: FormGroup;
-  datosUser: UserInterface = {
-    nombre: '',
-    apellido: '',
-    mail: '',
-    uid: '',
-    password: '',
-    perfil: 1
-  }
 
   constructor(
     private userService: UserService,

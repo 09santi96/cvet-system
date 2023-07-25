@@ -10,7 +10,6 @@ import { ModalUsersComponent } from '../modal-users/modal-users.component';
 
 
 
-
 export class MyCustomPaginatorIntl implements MatPaginatorIntl {
   changes = new Subject<void>();
 
@@ -64,7 +63,7 @@ export class UsersComponent implements AfterViewInit {
       width: '50%',
       height: 'auto',
       data:{
-        title: 'Editar usuario'
+        title: 'Nuevo usuario'
       }
     })
   }

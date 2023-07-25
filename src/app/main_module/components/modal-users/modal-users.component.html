@@ -61,8 +61,8 @@
         <mat-form-field class="inputs-width">
                 <!-- PERFIL -->
              <mat-select formControlName="perfil" [errorStateMatcher]="matcher" >
-                <mat-option *ngFor="let food of foods" [value]="food.value">
-                    {{food.viewValue}}
+                <mat-option *ngFor="let perfil of perfiles" [value]="perfil.value">
+                    {{perfil.viewValue}}
                 </mat-option>
             </mat-select>
             <mat-hint>Seleccione el perfil del usuario</mat-hint>
@@ -76,7 +76,7 @@
 
     <mat-dialog-actions class="mt-4">
         <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
-        <button mat-raised-button color="primary" [disabled]="formUsers.invalid" >Guardar</button>
+        <button mat-raised-button color="primary" (click)="OnCreateUser()" [disabled]="formUsers.invalid" >Guardar</button>
     </mat-dialog-actions>
 
 </form>

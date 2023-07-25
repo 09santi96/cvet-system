@@ -1,8 +1,10 @@
 export interface UserInterface {
-    nombre: String,
-    apellido: String,
-    mail: String,
-    uid: String,
-    password: String,
-    perfil: number
+    dni: number,
+    names: string,
+    email: string,
+    password: string,
+    perfil: number,
+    dateCreationUser: string,
+    dateUpdateUser: string,
+    uid: string
 }

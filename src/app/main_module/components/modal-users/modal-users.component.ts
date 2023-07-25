@@ -3,6 +3,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 /* FORMS */
 import { FormControl, FormGroup, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { UserService } from '../../services/user.service';
+import { PopupsService } from 'src/app/shared/services/popups.service';
 
 interface Perfiles {
   value: number;
@@ -29,7 +31,7 @@ export class ModalUsersComponent  {
   formUsers: FormGroup;
   matcher = new MyErrorStateMatcher();
 
-  foods: Perfiles[] = [
+  perfiles: Perfiles[] = [
     {value: 0, viewValue: 'Administrador'},
     {value: 1, viewValue: 'Secretaria'},
     {value: 2, viewValue: 'Veterinario'},
@@ -38,7 +40,10 @@ export class ModalUsersComponent  {
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: any,
-    private ref:MatDialogRef<ModalUsersComponent>)
+    private ref:MatDialogRef<ModalUsersComponent>,
+    private userService: UserService,
+    private popupsService: PopupsService
+    )
   {
     this.inputData = this.data;
     this.formUsers = new FormGroup({
@@ -53,4 +58,45 @@ export class ModalUsersComponent  {
   closeModal() :void{
     this.ref.close();
   }
+
+  OnCreateUser() :void{
+    //registra usuario
+    this.userService.register(this.formUsers.value.email, this.formUsers.value.password)
+    .then((userCredential) => {
+      //if register true
+      const newUser: any = {
+        dni: this.formUsers.value.dni,
+        names: this.formUsers.value.names,
+        email: this.formUsers.value.email,
+        password: this.formUsers.value.password,
+        perfil: this.formUsers.value.perfil,
+        dateCreationUser: new Date(),
+        dateUpdateUser: new Date(),
+        uid: userCredential.user.uid
+      }
+      //guarda el usuario en la collecion users
+      this.userService.addUsers(newUser)
+      .then((response) => {
+        if (response === 'Exito') {
+          // Mostrar una alerta si la operación fue un éxito.
+          this.popupsService.openSnackBar('¡Usuario agregado exitosamente!', 'x', 3000, 'right', 'top');
+          
+        }else{
+          // Mostrar una alerta si ocurrió un error.
+          this.popupsService.openSnackBar('error: ' + response, 'x', 3000, 'right', 'top');
+          console.log(response);
+        }
+        this.ref.close();
+      })
+      .catch((error) => {
+        // Mostrar una alerta si ocurrió un error inesperado en la promesa.
+        console.log(error);
+        this.ref.close();
+      });
+
+    })
+  }
+
+
+
 }

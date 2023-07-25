@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Auth, sendPasswordResetEmail, createUserWithEmailAndPassword} from '@angular/fire/auth';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { Firestore, doc, setDoc } from '@angular/fire/firestore';
+
 import { UserInterface } from 'src/app/main_module/components/users/model-user';
 
 @Injectable({
@@ -11,15 +12,24 @@ export class UserService {
 
   constructor(private auth: Auth,
         private firestore: Firestore
-    ) { }
+  ) { }
 
-  addUsers(newUser: UserInterface){
-    const userRef = collection(this.firestore, 'users');
-    return addDoc(userRef, newUser);
+  async addUsers(newUser: UserInterface): Promise<string> {
+  const userRef = doc(this.firestore, 'users', newUser.uid);
+    try{
+      await setDoc(userRef, newUser);
+      return 'Exito';
+
+    }catch (error) {
+      return 'Error '+ error;
+    }
+  }
+    
+
+  async register(email: string, password: string) {
+    return createUserWithEmailAndPassword(this.auth, email, password);
   }
 
-
-  
   async resetPassword(email: string): Promise<void>{
     try{
       return sendPasswordResetEmail(this.auth, email);
@@ -29,9 +39,6 @@ export class UserService {
     }
   }
 
-  async register({ email, password }: any) {
-    return createUserWithEmailAndPassword(this.auth, email, password);
-  }
 
 
 }
