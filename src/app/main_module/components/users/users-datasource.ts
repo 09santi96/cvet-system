@@ -4,6 +4,10 @@ import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 
+import { UserService } from '../../services/user.service';
+import { UserInterface } from './model-user';
+
+
 // TODO: Replace this with your own data model type
 export interface UsersItem {
   name: string;
@@ -29,7 +33,6 @@ export class UsersDataSource extends DataSource<UsersItem> {
   data: UsersItem[] = EXAMPLE_DATA;
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
-
   constructor() {
     super();
   }
