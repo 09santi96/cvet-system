@@ -7,33 +7,27 @@ import { Observable, of as observableOf, merge } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { UserInterface } from './model-user';
 
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+
 
 // TODO: Replace this with your own data model type
 export interface UsersItem {
-  name: string;
-  id: number;
+  dni: number,
+  names: string,
+  email: string,
+  password: string,
+  perfil: number,
+  dateCreationUser: string,
+  dateUpdateUser: string,
+  uid: string
 }
 
-// TODO: replace this with real data from your application
-const EXAMPLE_DATA: UsersItem[] = [
-  {id: 1, name: 'Hydrogen'},
-  {id: 2, name: 'Helium'},
-  {id: 3, name: 'Lithium'},
-  {id: 4, name: 'Beryllium'},
-  {id: 5, name: 'Boron'}
 
-];
-
-/**
- * Data source for the Users view. This class should
- * encapsulate all logic for fetching and manipulating the displayed data
- * (including sorting, pagination, and filtering).
- */
 export class UsersDataSource extends DataSource<UsersItem> {
-  data: UsersItem[] = EXAMPLE_DATA;
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
-  constructor() {
+
+  constructor(public data: UsersItem[]) {
     super();
   }
 
@@ -86,8 +80,8 @@ export class UsersDataSource extends DataSource<UsersItem> {
     return data.sort((a, b) => {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
+        case 'names': return compare(a.names, b.names, isAsc);
+        case 'uid': return compare(+a.uid, +b.uid, isAsc);
         default: return 0;
       }
     });

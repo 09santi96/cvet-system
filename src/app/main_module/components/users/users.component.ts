@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -7,6 +7,7 @@ import {Subject} from 'rxjs';
 
 import { MatDialog } from '@angular/material/dialog';
 import { ModalUsersComponent } from '../modal-users/modal-users.component';
+import { UserService } from '../../services/user.service';
 
 
 
@@ -34,26 +35,37 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
   styleUrls: ['./users.component.css'],
   providers: [{provide: MatPaginatorIntl, useClass: MyCustomPaginatorIntl}]
 })
-export class UsersComponent implements AfterViewInit {
+export class UsersComponent implements AfterViewInit, OnInit {
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<UsersItem>;
-  dataSource: UsersDataSource;
-
+  dataSource!: UsersDataSource;
+  /* data: UsersItem[] = [
+    {dni: 39796812 ,names: 'pichica Martinez', email: '09santi96@gmail.com', password: 'samo7266', perfil: 1, dateCreationUser: '', dateUpdateUser: '', uid: '1'},
+  ]; */
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name', 'actions'];
+  displayedColumns = ['uid', 'names', 'email', 'perfil', 'actions'];
 
-  constructor(private dialog:MatDialog) 
+  constructor(private dialog:MatDialog, private usersData: UserService) 
   {
-    this.dataSource = new UsersDataSource();
+    //this.dataSource = new UsersDataSource(this.data);
+   /*  this.usersData.getUsers().subscribe(data => {
+      this.dataSource = new UsersDataSource(data);
+    }) */
+  }
+  
+  ngOnInit(): void {
+    this.usersData.getUsers().subscribe(rs => {
+      this.dataSource = new UsersDataSource(rs);
+    });
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.table.dataSource = this.dataSource;
   }
 
   onEdit(id:number) :void {
