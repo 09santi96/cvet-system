@@ -28,12 +28,15 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { VeterinariosComponent } from './components/veterinarios/veterinarios.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     UsersComponent,
-    ModalUsersComponent
+    ModalUsersComponent,
+    VeterinariosComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +56,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule
 
   ],
   exports:[

@@ -37,7 +37,8 @@ export class MenuComponent implements OnInit {
                 },
                 {
                     label: 'Veterinarios',
-                    icon: 'pi pi-fw pi-github'
+                    icon: 'pi pi-fw pi-github',
+                    routerLink: 'vets',
                 },
                 {
                     label: 'Legajos',

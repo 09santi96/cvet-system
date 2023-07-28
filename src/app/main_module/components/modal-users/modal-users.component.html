@@ -77,6 +77,7 @@
     <mat-dialog-actions class="mt-4">
         <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
         <button mat-raised-button color="primary" (click)="OnCreateUser()" [disabled]="formUsers.invalid" >Guardar</button>
+     <!--    <mat-spinner *ngIf="isLoadingResults"></mat-spinner> -->
     </mat-dialog-actions>
 
 </form>

@@ -4,11 +4,6 @@ import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 
-import { UserService } from '../../services/user.service';
-import { UserInterface } from './model-user';
-
-import { Firestore, collection, collectionData } from '@angular/fire/firestore';
-
 
 // TODO: Replace this with your own data model type
 export interface UsersItem {

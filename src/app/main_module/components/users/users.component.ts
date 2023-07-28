@@ -40,21 +40,16 @@ export class UsersComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<UsersItem>;
-  dataSource!: UsersDataSource;
   /* data: UsersItem[] = [
     {dni: 39796812 ,names: 'pichica Martinez', email: '09santi96@gmail.com', password: 'samo7266', perfil: 1, dateCreationUser: '', dateUpdateUser: '', uid: '1'},
   ]; */
-
+  
+  dataSource!: UsersDataSource;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['uid', 'names', 'email', 'perfil', 'actions'];
 
   constructor(private dialog:MatDialog, private usersData: UserService) 
-  {
-    //this.dataSource = new UsersDataSource(this.data);
-   /*  this.usersData.getUsers().subscribe(data => {
-      this.dataSource = new UsersDataSource(data);
-    }) */
-  }
+  {  }
   
   ngOnInit(): void {
     this.usersData.getUsers().subscribe(rs => {
@@ -63,12 +58,15 @@ export class UsersComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit(): void {
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-      this.table.dataSource = this.dataSource;
+    this.table.dataSource = this.dataSource;
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   onEdit(id:number) :void {
+
+  }
+  onDelete(id:number) :void {
 
   }
   onCreate(id:number) :void {

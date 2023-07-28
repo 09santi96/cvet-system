@@ -12,6 +12,7 @@ import { UserInterface } from 'src/app/main_module/components/users/model-user';
 
 export class UserService {
   
+  userDataRef = collection(this.firestore, 'users');
 
   constructor(private auth: Auth,
         private firestore: Firestore,
@@ -43,8 +44,11 @@ export class UserService {
 
 
   getUsers(): Observable<UserInterface[]>{
-   const userDataRef = collection(this.firestore, 'users');
-   return collectionData(userDataRef, undefined) as Observable<UserInterface[]>;
+   return collectionData(this.userDataRef, undefined) as Observable<UserInterface[]>;
+  }
+  
+  deleteUsers(id: string){
+    
   }
 
 }
