@@ -2,11 +2,11 @@
   <span class="icon-spacer">
     <mat-icon>person</mat-icon>
   </span>
-  <span>Usuarios</span>
+  <span>Veterinarios</span>
   <div class="button-row">
     <button mat-fab extended color="primary" (click)="onCreate(0)">
       <mat-icon>person_add</mat-icon>
-      Agregar usuario
+      Agregar Veterinario
     </button>
   </div>
 
@@ -18,7 +18,7 @@
   <div class="loading-shade" *ngIf="isLoadingResults">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
   </div>
-    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+    <table mat-table [dataSource]="dataSource" matSort>
       
       <!-- Position Column -->
       <ng-container matColumnDef="uid">

@@ -21,11 +21,11 @@
 
   <mat-sidenav-container class="sidenav-container" [hasBackdrop]="false" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
     
-    <mat-sidenav  class="mat-sidenav" #mySidenav (mouseleave)="onMouseLeave()" [mode]="'over'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+    <mat-sidenav  class="mat-sidenav" #mySidenav [mode]="'over'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
       
       <mat-nav-list class="mat-nav-list">
         <!-- Menu buttons -->
-         <app-menu></app-menu>
+         <app-menu (closeSideNav)="closeMainMenu()"></app-menu>
       
       </mat-nav-list>
 

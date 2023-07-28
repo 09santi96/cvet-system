@@ -31,6 +31,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { VeterinariosComponent } from './components/veterinarios/veterinarios.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
+
 @NgModule({
   declarations: [
     DashboardComponent,

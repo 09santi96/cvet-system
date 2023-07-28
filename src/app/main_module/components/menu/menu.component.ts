@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { PrimeIcons, MenuItem } from 'primeng/api';
-
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-menu',
@@ -11,6 +10,8 @@ export class MenuComponent implements OnInit {
 
   fillerNav = Array.from({length: 20}, (_, i) => `Nav Item ${i + 1}`);
 
+  @Output() closeSideNav = new EventEmitter<void>();
+
   items: MenuItem[] = [];
 
   ngOnInit() {
@@ -19,7 +20,8 @@ export class MenuComponent implements OnInit {
           {
               label: 'Dashboard',
               icon: 'pi pi-fw pi-home',
-              routerLink: 'dashboard'
+              routerLink: 'dashboard',
+              command: () => {this.onClickButtonClose()}
           },
 
           {
@@ -30,19 +32,23 @@ export class MenuComponent implements OnInit {
                     label: 'Usuarios',
                     icon: 'pi pi-fw pi-user',
                     routerLink: 'users',
+                    command: () => {this.onClickButtonClose()}
                 },
                 {
                     label: 'Perfiles',
-                    icon: 'pi pi-fw pi-id-card'
+                    icon: 'pi pi-fw pi-id-card',
+                    command: () => {this.onClickButtonClose()}
                 },
                 {
                     label: 'Veterinarios',
                     icon: 'pi pi-fw pi-github',
                     routerLink: 'vets',
+                    command: () => {this.onClickButtonClose()}
                 },
                 {
                     label: 'Legajos',
-                    icon: 'pi pi-fw pi-folder-open'
+                    icon: 'pi pi-fw pi-folder-open',
+                    command: () => {this.onClickButtonClose()}
                 }
             ]
 
@@ -50,5 +56,8 @@ export class MenuComponent implements OnInit {
       ];
   }
 
+  onClickButtonClose() {
+    this.closeSideNav.emit();
+  }
 
 }
