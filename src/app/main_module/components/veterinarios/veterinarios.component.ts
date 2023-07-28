@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild, ElementRef } from '@angular/core';
 import {Subject} from 'rxjs';
 
 import {MatDialog} from '@angular/material/dialog';
@@ -37,21 +37,33 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
 export class VeterinariosComponent implements AfterViewInit{
   displayedColumns: string[] = ['uid', 'names', 'email', 'perfil', 'actions'];
   dataSource!: MatTableDataSource<any>; 
+  isLoadingResults = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private dialog:MatDialog, private usersData: UserService){
-   
-  }
-
-  ngAfterViewInit() {
-    this.usersData.getUsers().subscribe(rs => {
-      this.dataSource = new MatTableDataSource(rs);
-      this.dataSource.paginator = this.paginator;
-    });
+  constructor(private dialog:MatDialog, private usersData: UserService, private elementRef: ElementRef){
     
   }
 
+  ngAfterViewInit() {
+    this.isLoadingResults = true;
+    this.usersData.getUsers().subscribe(rs => {
+      this.dataSource = new MatTableDataSource(rs);
+      this.dataSource.paginator = this.paginator;
+      this.isLoadingResults = false;
+    });
+    
+    const elementToHide = this.elementRef.nativeElement.querySelector('.mat-mdc-form-field-subscript-wrapper');
+    // Verificar si el elemento existe antes de ocultarlo
+    if (elementToHide) {
+      elementToHide.style.display = 'none';
+    }
+    
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   onCreate(id:number) :void {
     this.dialog.open(ModalUsersComponent, {
       width: '50%',
