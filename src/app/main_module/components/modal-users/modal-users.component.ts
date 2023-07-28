@@ -30,6 +30,7 @@ export class ModalUsersComponent  {
   hide = true;
   formUsers: FormGroup;
   matcher = new MyErrorStateMatcher();
+  isSavingNewUser = false;
 
   perfiles: Perfiles[] = [
     {value: 0, viewValue: 'Administrador'},
@@ -61,6 +62,7 @@ export class ModalUsersComponent  {
 
   OnCreateUser() :void{
     //registra usuario
+    this.isSavingNewUser = true;
     this.userService.register(this.formUsers.value.email, this.formUsers.value.password)
     .then((userCredential) => {
       //if register true
@@ -79,18 +81,20 @@ export class ModalUsersComponent  {
       .then((response) => {
         if (response === 'Exito') {
           // Mostrar una alerta si la operación fue un éxito.
-          this.popupsService.openSnackBar('¡Usuario agregado exitosamente!', 'x', 3000, 'right', 'top');
+          this.popupsService.openSnackBar('¡Usuario agregado exitosamente!', 'x', 4000, 'right', 'top');
           
         }else{
           // Mostrar una alerta si ocurrió un error.
           this.popupsService.openSnackBar('error: ' + response, 'x', 3000, 'right', 'top');
           console.log(response);
         }
+        this.isSavingNewUser = false;
         this.ref.close();
       })
       .catch((error) => {
         // Mostrar una alerta si ocurrió un error inesperado en la promesa.
         console.log(error);
+        this.isSavingNewUser = false;
         this.ref.close();
       });
 
