@@ -15,6 +15,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatCardModule} from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -36,6 +37,7 @@ import {MatCardModule} from '@angular/material/card';
     MatListModule,
     MatTooltipModule,
   
+  
   ],
   exports: [
     MatButtonModule,
@@ -49,7 +51,8 @@ import {MatCardModule} from '@angular/material/card';
     MatListModule,
     MatTooltipModule,
     MatMenuModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule
   
   ]
 })

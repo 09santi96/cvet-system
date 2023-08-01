@@ -47,7 +47,10 @@
         <p class="forgot-password"> <a [routerLink]="['/forgot-password']">¿Olvidaste tu contraseña?</a></p>
     </div>
     <div class="mt-4">
-        <button mat-raised-button color="primary" [disabled]="formLogin.invalid" (click)="onSubmit()">Iniciar sesion</button>
+        <button mat-raised-button color="primary" [disabled]="formLogin.invalid" (click)="onSubmit()">
+            <span *ngIf="!isLoginUser">Iniciar sesion</span>
+            <mat-spinner class="custom-spinner" diameter="35" *ngIf="isLoginUser"></mat-spinner> 
+        </button>
     </div>
 
 

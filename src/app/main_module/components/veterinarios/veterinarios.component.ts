@@ -54,7 +54,7 @@ export class VeterinariosComponent implements AfterViewInit, OnInit{
   }
 
   ngAfterViewInit() {
-    this.usersData.getUsers().subscribe(rs => {
+    this.usersData.getVets().subscribe(rs => {
       this.dataSource = new MatTableDataSource(rs);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -64,7 +64,10 @@ export class VeterinariosComponent implements AfterViewInit, OnInit{
     const elementToHide = this.elementRef.nativeElement.querySelector('.mat-mdc-form-field-subscript-wrapper');
     // Verificar si el elemento existe antes de ocultarlo
     if (elementToHide) {
-      elementToHide.style.display = 'none';
+      //elementToHide.style.content = 'none';
+      const nuevoSpan = document.createElement("strong");
+      nuevoSpan.textContent = "Fecha de creacion";
+      elementToHide.appendChild(nuevoSpan);
     }
     
   }

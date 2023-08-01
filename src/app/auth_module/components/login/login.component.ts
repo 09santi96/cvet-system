@@ -25,6 +25,7 @@ export class LoginComponent {
   formLogin: FormGroup;
   hide = true;
   matcher = new MyErrorStateMatcher();
+  isLoginUser= false;
 
   constructor(
     private userService: UserService,
@@ -41,19 +42,24 @@ export class LoginComponent {
   //EVENT ENTER
   @HostListener('document:keypress', ['$event'])
   onKeyPress(event: KeyboardEvent) {
+    
     if (event.key === 'Enter') {
+      event.preventDefault();
       this.onSubmit();
     }
   }
 
   //INICIO SESION
   onSubmit() {
+    this.isLoginUser= true;
     this.userService.login(this.formLogin.value)
     .then(response => {
+      this.isLoginUser= false;
       this.popupsService.openSnackBar('Bienvenido', 'x', 3000, 'right', 'top');
       this.router.navigate(['/main']);
     })
     .catch(error => {
+      this.isLoginUser= false;
       this.popupsService.openSnackBar('Mail o Contraseña incorrecta', 'x', 2500, 'right', 'top');
     });
   }

@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UsersComponent } from './components/users/users.component';
 import { VeterinariosComponent } from './components/veterinarios/veterinarios.component';
+import { ProfileComponent } from './components/profile/profile.component';
+
 
 
 
@@ -19,6 +21,9 @@ const routes: Routes = [
   },
   {
     path: 'vets', component: VeterinariosComponent
+  },
+  {
+    path: 'profile', component: ProfileComponent
   },
   {
     path: '**', pathMatch: 'full', redirectTo: 'dashboard'

@@ -10,7 +10,7 @@
     </button>
 
     <span class="spacer"></span>
-    <button mat-icon-button matTooltip="Mi perfil" class="icon favorite-icon" aria-label="Mi perfil">
+    <button mat-icon-button matTooltip="Mi perfil" (click)="viewPerfil()" class="icon favorite-icon" aria-label="Mi perfil">
       <mat-icon>person</mat-icon>
     </button>
     <button mat-icon-button (click)="onLogout()" matTooltip="Cerrar sesion" aria-label="Cerrar sesion">

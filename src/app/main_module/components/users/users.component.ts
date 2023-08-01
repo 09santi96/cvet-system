@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import {Subject} from 'rxjs';
-import {LiveAnnouncer} from '@angular/cdk/a11y';
 
 import {MatDialog} from '@angular/material/dialog';
 import {MatPaginator, MatPaginatorIntl} from '@angular/material/paginator';
@@ -36,7 +35,7 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
   providers: [{provide: MatPaginatorIntl, useClass: MyCustomPaginatorIntl}]
 })
 export class UsersComponent implements AfterViewInit, OnInit{
-  displayedColumns: string[] = ['uid', 'names', 'email', 'perfil', 'actions'];
+  displayedColumns: string[] = [ 'dateCreationUser', 'dni', 'names', 'email', 'perfil', 'actions'];
   dataSource!: MatTableDataSource<any>; 
   isLoadingResults = false;
 
@@ -46,8 +45,7 @@ export class UsersComponent implements AfterViewInit, OnInit{
   constructor(
     private dialog:MatDialog, 
     private usersData: UserService, 
-    private elementRef: ElementRef,
-    private _liveAnnouncer: LiveAnnouncer
+    private elementRef: ElementRef
     ){  }
   
   ngOnInit(){
@@ -65,26 +63,16 @@ export class UsersComponent implements AfterViewInit, OnInit{
     const elementToHide = this.elementRef.nativeElement.querySelector('.mat-mdc-form-field-subscript-wrapper');
     // Verificar si el elemento existe antes de ocultarlo
     if (elementToHide) {
-      elementToHide.style.display = 'none';
+      //elementToHide.style.content = 'none';
+      const nuevoSpan = document.createElement("strong");
+      nuevoSpan.textContent = "Fecha de creacion";
+      elementToHide.appendChild(nuevoSpan);
     }
     
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  /** Announce the change in sort state for assistive technology. */
-  announceSortChange(sortState: Sort) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
   }
 
   onCreate(id:number) :void {

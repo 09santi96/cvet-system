@@ -34,7 +34,7 @@ export class ModalUsersComponent  {
 
   perfiles: Perfiles[] = [
     {value: 0, viewValue: 'Administrador'},
-    {value: 1, viewValue: 'Secretaria'},
+    {value: 1, viewValue: 'secretaría'},
     {value: 2, viewValue: 'Veterinario'},
   ];
 

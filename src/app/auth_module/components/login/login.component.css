@@ -61,6 +61,9 @@
   text-decoration: none;
   color: #7300ff;
 }
+:host ::ng-deep .custom-spinner circle{   
+  stroke: #ffffff;
+}
 /*---------------------------MEDIA QUERIES---------------------------*/
 @media only screen and (max-width: 1000px) {
   .sectionLogin{

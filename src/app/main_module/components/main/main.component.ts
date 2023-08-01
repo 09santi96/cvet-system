@@ -69,5 +69,7 @@ export class MainComponent  implements OnDestroy  {
     })
   }
 
-  
+  viewPerfil(){
+    this.router.navigate(['/main/profile']);
+  }
 }
