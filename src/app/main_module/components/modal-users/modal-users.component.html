@@ -1,8 +1,11 @@
-<div class="title-container">
-    <h1>{{inputData.title}}</h1>
-</div>
-
 <mat-dialog-content>
+
+    <div class="title-container">
+        <h1>{{data.objectTitle.title}}</h1>
+    </div>
+    <button class="closeButton" mat-icon-button (click)="closeModal()" aria-label="Cerrar dialogo de usuario">
+        <mat-icon>close</mat-icon>
+    </button>
     <form class="user-form" [formGroup]="formUsers">
 
         <mat-form-field class="inputs-width">
@@ -75,7 +78,7 @@
 
 
     <mat-dialog-actions class="mt-4">
-        <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+        <button mat-raised-button color="warn" (click)="closeModal()">Cancelar</button>
         <button mat-raised-button color="primary" (click)="OnCreateUser()" [disabled]="formUsers.invalid" >
             <span *ngIf="!isSavingNewUser">Guardar</span>
             <mat-spinner class="custom-spinner" diameter="25" *ngIf="isSavingNewUser"></mat-spinner> 

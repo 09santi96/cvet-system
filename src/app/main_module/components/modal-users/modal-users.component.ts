@@ -1,10 +1,11 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 /* FORMS */
 import { FormControl, FormGroup, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { UserService } from '../../services/user.service';
 import { PopupsService } from 'src/app/shared/services/popups.service';
+
 
 interface Perfiles {
   value: number;
@@ -26,9 +27,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./modal-users.component.css']
 })
 export class ModalUsersComponent  {
-  inputData: any;
   hide = true;
-  formUsers: FormGroup;
+  formUsers!: FormGroup;
   matcher = new MyErrorStateMatcher();
   isSavingNewUser = false;
 
@@ -46,14 +46,26 @@ export class ModalUsersComponent  {
     private popupsService: PopupsService
     )
   {
-    this.inputData = this.data;
-    this.formUsers = new FormGroup({
-      dni: new FormControl('', [Validators.required]),
-      names: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required),
-      perfil: new FormControl('', [Validators.required])
-    });
+  
+    if(this.data.objectTitle.title == 'Nuevo usuario'){
+      this.formUsers = new FormGroup({
+        dni: new FormControl('', [Validators.required]),
+        names: new FormControl('', [Validators.required]),
+        email: new FormControl('', [Validators.required, Validators.email]),
+        password: new FormControl('', Validators.required),
+        perfil: new FormControl('', [Validators.required])
+      });
+
+    }else if(this.data.objectTitle.title == 'Editar usuario'){
+      this.formUsers = new FormGroup({
+        dni: new FormControl(this.data.objectUserInterface.dni, [Validators.required]),
+        names: new FormControl(this.data.objectUserInterface.names, [Validators.required]),
+        email: new FormControl(this.data.objectUserInterface.email, [Validators.required, Validators.email]),
+        password: new FormControl(this.data.objectUserInterface.password, Validators.required),
+        perfil: new FormControl(this.data.objectUserInterface.perfil, [Validators.required])
+      });
+    }
+    
   }
 
   closeModal() :void{
@@ -61,6 +73,7 @@ export class ModalUsersComponent  {
   }
 
   OnCreateUser() :void{
+    console.log(this.data);
     //registra usuario
     this.isSavingNewUser = true;
     this.userService.register(this.formUsers.value.email, this.formUsers.value.password)
@@ -86,14 +99,12 @@ export class ModalUsersComponent  {
         }else{
           // Mostrar una alerta si ocurrió un error.
           this.popupsService.openSnackBar('error: ' + response, 'x', 3000, 'right', 'top');
-          console.log(response);
         }
         this.isSavingNewUser = false;
         this.ref.close();
       })
       .catch((error) => {
         // Mostrar una alerta si ocurrió un error inesperado en la promesa.
-        console.log(error);
         this.isSavingNewUser = false;
         this.ref.close();
       });

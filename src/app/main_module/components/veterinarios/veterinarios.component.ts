@@ -1,10 +1,10 @@
 import {AfterViewInit, Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-import {Subject} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 
 import {MatDialog} from '@angular/material/dialog';
 import {MatPaginator, MatPaginatorIntl} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import {MatSort, Sort} from '@angular/material/sort';
+import {MatSort} from '@angular/material/sort';
 
 import { UserService } from '../../services/user.service';
 import { ModalUsersComponent } from '../modal-users/modal-users.component';
@@ -39,6 +39,7 @@ export class VeterinariosComponent implements AfterViewInit, OnInit{
   displayedColumns: string[] = ['uid', 'names', 'email', 'perfil', 'actions'];
   dataSource!: MatTableDataSource<any>; 
   isLoadingResults = false;
+  private vetsSubscription!: Subscription;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -54,7 +55,7 @@ export class VeterinariosComponent implements AfterViewInit, OnInit{
   }
 
   ngAfterViewInit() {
-    this.usersData.getVets().subscribe(rs => {
+    this.vetsSubscription = this.usersData.getVets().subscribe(rs => {
       this.dataSource = new MatTableDataSource(rs);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -69,8 +70,15 @@ export class VeterinariosComponent implements AfterViewInit, OnInit{
       nuevoSpan.textContent = "Fecha de creacion";
       elementToHide.appendChild(nuevoSpan);
     }
-    
   }
+
+  ngOnDestroy() {
+    // Unsubscribe from the Observable to avoid memory leaks
+    if (this.vetsSubscription) {
+      this.vetsSubscription.unsubscribe();
+    }
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

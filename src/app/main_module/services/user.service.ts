@@ -60,9 +60,15 @@ export class UserService {
 
   getUsers(): Observable<UserInterface[]>{
     let queryUsers = query(this.userCollectionRef, orderBy('dateCreationUser', 'desc'));
-   return collectionData(queryUsers, undefined) as Observable<UserInterface[]>;
+    return collectionData(queryUsers, undefined) as Observable<UserInterface[]>;
   }
 
+  getUserById(id :string) :Observable<UserInterface[]> {
+    // get a reference to the user-profile collection
+    let queryCurrenteUser = query(this.userCollectionRef, where('uid', '==', id));
+    // get documents (data) from the collection using collectionData
+    return collectionData(queryCurrenteUser) as Observable<UserInterface[]>;
+  }
 
   getVets(): Observable<UserInterface[]>{
     let queryVets = query(this.userCollectionRef, where('perfil', '==', 2));
