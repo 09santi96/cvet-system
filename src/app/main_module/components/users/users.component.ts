@@ -8,7 +8,7 @@ import {MatSort} from '@angular/material/sort';
 
 import { UserService } from '../../services/user.service';
 import { ModalUsersComponent } from '../modal-users/modal-users.component';
-import { UserInterface } from './model-user';
+
 
 
 export class MyCustomPaginatorIntl implements MatPaginatorIntl {
@@ -36,19 +36,17 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
   providers: [{provide: MatPaginatorIntl, useClass: MyCustomPaginatorIntl}]
 })
 export class UsersComponent implements AfterViewInit, OnInit{
-  displayedColumns: string[] = [ 'dateCreationUser', 'dni', 'names', 'email', 'perfil', 'actions'];
+  displayedColumns: string[] = [ 'dateUpdateUser', 'dni', 'names', 'email', 'perfil', 'actions'];
   dataSource!: MatTableDataSource<any>; 
   isLoadingResults = false;
-  objectOne! : UserInterface;
-  objectTwo = {
-    title: 'Nuevo usuario'
-  }
+
   dataDialogToSend = {
-    objectUserInterface: this.objectOne,
-    objectTitle: this.objectTwo
-  };  
+    title: 'Nuevo usuario',
+    uid: ''
+  }
+
   private usersSubscription!: Subscription;
-  private usersModalSubscription!: Subscription;
+  
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -77,7 +75,7 @@ export class UsersComponent implements AfterViewInit, OnInit{
     if (elementToHide) {
       //elementToHide.style.content = 'none';
       const nuevoSpan = document.createElement("strong");
-      nuevoSpan.textContent = "Fecha de creacion";
+      nuevoSpan.textContent = "Ultima modificacion";
       elementToHide.appendChild(nuevoSpan);
     }
 
@@ -87,17 +85,10 @@ export class UsersComponent implements AfterViewInit, OnInit{
     // Unsubscribe from the Observable to avoid memory leaks
     if (this.usersSubscription) {
       this.usersSubscription.unsubscribe();
-      console.log('desubscrito de la lista');
     }
-    this.unsubscribeFromModalUser();
   }
 
-  unsubscribeFromModalUser(): void{
-    if (this.usersModalSubscription) {
-      this.usersSubscription.unsubscribe();
-      console.log('desubscrito del modal');
-    }
-  }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -105,30 +96,14 @@ export class UsersComponent implements AfterViewInit, OnInit{
   }
 
   onCreate(id:string) :void {
-  if(id !== '0'){
-    this.objectTwo['title'] = 'Editar usuario';
+    this.dataDialogToSend['uid'] = id;
+    if(id !== '0'){
+      this.dataDialogToSend['title'] = 'Editar usuario';
+    }else{
+      this.dataDialogToSend['title'] = 'Nuevo usuario';
+    }
 
-    // error se subscribe cada vez que doy click al boton editar
-   this.usersModalSubscription = this.usersService.getUserById(id).subscribe({
-      next: (rs) => {
-        this.dataDialogToSend.objectUserInterface = rs[0];
-        console.log(this.dataDialogToSend);
-      },
-    })
-
-    setTimeout(() => {
-      this.dialog.open(ModalUsersComponent, {
-        width: '50%',
-        height: 'auto',
-        data: this.dataDialogToSend
-      })
-    }, 500);
-
-  }else{
-    console.log(this.dataDialogToSend);
-    this.objectTwo['title'] = 'Nuevo usuario';
-
-  //open dialog nuevo usuario
+    //open dialog nuevo usuario
     this.dialog.open(ModalUsersComponent, {
       disableClose: true,
       width: '50%',
@@ -136,9 +111,7 @@ export class UsersComponent implements AfterViewInit, OnInit{
       data: this.dataDialogToSend
     })
 
-
   }
-}
 
 
 

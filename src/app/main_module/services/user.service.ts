@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Auth, sendPasswordResetEmail, createUserWithEmailAndPassword} from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword} from '@angular/fire/auth';
 
-import { Firestore, doc, setDoc, collection, collectionData, query, getDocs, orderBy, getDoc} from '@angular/fire/firestore';
+import { Firestore, doc, setDoc, collection, collectionData, query, orderBy} from '@angular/fire/firestore';
 
 import { UserInterface } from 'src/app/main_module/components/users/model-user';
 import { where } from 'firebase/firestore';
@@ -15,21 +15,19 @@ export class UserService {
   
   constructor(private auth: Auth,
         private firestore: Firestore,
-  ) { 
-    
-  }
-  _currentUser = this.auth.currentUser;
+  ) {   }
+  
   userCollectionRef = collection(this.firestore, 'users');
 
   async addUsers(newUser: UserInterface): Promise<string> {
-  const userDocRef = doc(this.firestore, 'users', newUser.uid);
-    try{
-      await setDoc(userDocRef, newUser);
-      return 'Exito';
+    const userDocRef = doc(this.firestore, 'users', newUser.uid);
+      try{
+        await setDoc(userDocRef, newUser);
+        return 'Exito';
 
-    }catch (error) {
-      return 'Error '+ error;
-    }
+      }catch (error) {
+        return 'Error '+ error;
+      }
   }
 
   async register(email: string, password: string) {
@@ -59,7 +57,7 @@ export class UserService {
 
 
   getUsers(): Observable<UserInterface[]>{
-    let queryUsers = query(this.userCollectionRef, orderBy('dateCreationUser', 'desc'));
+    let queryUsers = query(this.userCollectionRef, orderBy('dateUpdateUser', 'desc'));
     return collectionData(queryUsers, undefined) as Observable<UserInterface[]>;
   }
 

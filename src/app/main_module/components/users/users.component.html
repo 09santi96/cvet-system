@@ -21,7 +21,7 @@
     <table mat-table [dataSource]="dataSource" matSort>
       
       <!-- Position Column -->
-      <ng-container matColumnDef="dateCreationUser">
+      <ng-container matColumnDef="dateUpdateUser">
         <th mat-header-cell *matHeaderCellDef style="display:flex; vertical-align:center;"> 
           <mat-form-field>
             <mat-label>Busqueda general</mat-label>
@@ -29,7 +29,7 @@
           </mat-form-field>
           <span mat-sort-header style="position:relative; top:24px;"></span>
         </th>
-        <td mat-cell *matCellDef="let element"> {{ element.dateCreationUser.toDate() | date: 'dd/MM/yyyy HH:mm:ss' }} </td>
+        <td mat-cell *matCellDef="let element"> {{ element.dateUpdateUser.toDate() | date: 'dd/MM/yyyy HH:mm:ss' }} </td>
       </ng-container>
 
       <!-- dni Column -->
