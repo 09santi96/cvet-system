@@ -2,10 +2,11 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Auth, createUserWithEmailAndPassword} from '@angular/fire/auth';
 
-import { Firestore, doc, setDoc, collection, collectionData, query, orderBy} from '@angular/fire/firestore';
+import { Firestore, doc, setDoc, collection, collectionData, query, orderBy, getDoc} from '@angular/fire/firestore';
 
 import { UserInterface } from 'src/app/main_module/components/users/model-user';
 import { where } from 'firebase/firestore';
+import { ProfilesInterface } from '../components/profiles/model-profiles';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class UserService {
   ) {   }
   
   userCollectionRef = collection(this.firestore, 'users');
+  perfilCollectionRef = collection(this.firestore, 'perfiles');
 
   async addUsers(newUser: UserInterface): Promise<string> {
     const userDocRef = doc(this.firestore, 'users', newUser.uid);
@@ -34,17 +36,19 @@ export class UserService {
     return createUserWithEmailAndPassword(this.auth, email, password);
   }
 
-/*   async getCurrentUserData(){
+
+  getCurrentUserData() :Observable<UserInterface[]> {
     const user = this.auth.currentUser;
-    if(user){
-      const userDocRef = doc(this.firestore, 'users', user.uid);
-      return await getDoc(userDocRef);
+    // get a reference to the user-profile collection
+    let queryCurrenteUser = query(this.userCollectionRef, where('uid', '==', user?.uid));
+    // get documents (data) from the collection using collectionData
+    return collectionData(queryCurrenteUser) as Observable<UserInterface[]>;
+  }
 
-    }else{
-      return null
-    }
-
-  } */
+  getCurrentPerfilData(perfilId: number) :Observable<ProfilesInterface[]> {
+    let queryCurrentePerfil = query(this.perfilCollectionRef, where('id', '==', perfilId));
+    return collectionData(queryCurrentePerfil) as Observable<ProfilesInterface[]>;
+  }
 
   /* async resetPassword(email: string): Promise<void>{
     try{

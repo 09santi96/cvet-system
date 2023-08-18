@@ -31,6 +31,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { VeterinariosComponent } from './components/veterinarios/veterinarios.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ProfilesComponent } from './components/profiles/profiles.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     UsersComponent,
     ModalUsersComponent,
     VeterinariosComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProfilesComponent
   ],
   imports: [
     CommonModule,
